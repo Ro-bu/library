@@ -52,7 +52,7 @@ html{
 }
 body{
     min-width: 100vw;
-    min-height: 100vh;
+    min-height: 100vh; 
 }
 .main-wrapper{
     display: grid;
@@ -67,6 +67,8 @@ body{
     display: flex;
     align-items: center;
     justify-content: space-between;
+    grid-column: 1/2;
+    grid-row: 1/2;
 }
 .header h1{
     font-size: 3em;
@@ -92,14 +94,75 @@ body{
     display: flex;
     flex-direction: column;
     align-items: center;
+    grid-row:2/3;
+    grid-column: 1/2;
 }
 .add-book{
     margin: 2em 0 2em 0;
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: 10px 20px 10px 20px;
+    border-radius: 15px;
+}
+.add-book:hover{
+    background-color: #cfcfcf;
 }
 .add-book span{
     font-size: 1.5em;
     margin-left: 5px;
+}
+.book-wrapper{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 350px);
+    /* grid-template-rows: repeat(auto-fit, 350px); */
+    gap: 40px;
+    padding: 0 3em 0 3em; 
+    width: 100%;
+    box-sizing: border-box;
+}
+.book-card{
+    display: flex;
+    flex-direction: column;
+    height: 350px;
+    width: 350px;
+    box-sizing: border-box;
+    background-color:#ffffff;
+    align-items: center;
+    justify-content: space-between;
+    padding: 30px 20px 30px 20px;
+    border-radius: 10px;
+    border-top: 8px solid #fca311;
+    box-shadow: 2px 2px 3px 0px #cfcfcf;
+    font-size: 1.4em;
+}
+.book-button-cont{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 10px;
+}
+.book-button-cont button{
+    border: none;
+    font-size:1em;
+    padding: 10px 0 10px 0;
+    border-radius: 5px;
+}
+.read-button-cont{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+}
+.read-button-cont button{
+    width: 50%;
+    background-color: #fca311;
+}
+.read-unread{
+    width: 50%;
+    text-align: center;
+}
+.remove-button{
+    background-color: #e63946;
 }
