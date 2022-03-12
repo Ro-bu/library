@@ -5,13 +5,47 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Library</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="scripts.js"></script>
+    <script src="scripts.js" defer></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700;900&family=Poppins:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="main-wrapper">
+        <div class="modal">
+            <div class="modal-content">
+                <h2>Add Your Book</h2>
+                <span class="modal-close">&times;</span>
+                <form>
+                    <div>
+                        <label for="title">TITLE</label>
+                        <input type="text" id="title" name="title" required>
+                    </div>
+                    <div>
+                        <label for="author">AUTHOR</label>
+                        <input type="text" id="author" name="author">
+                    </div>
+                    <div>
+                        <label for="pages">PAGES</label>
+                        <input type="text" id="pages" name="pages">
+                    </div>
+                    <div>
+                        <p>READ</p>
+                        <div class="radio-cont">
+                            <div>
+                                <input type="radio" id="yes" name="read" value="READ" checked>
+                                <label for="yes">Yes</label>
+                            </div>
+                            <div>
+                                <input type="radio" id="no" name="read" value="UNREAD">
+                                <label for="no">No</label>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" id="modalSubmit">SUBMIT</button>
+                </form>
+            </div>
+        </div>
         <div class="header">
             <h1>Library</h1>
             <button>Log in</button>
@@ -56,15 +90,15 @@
                     <p class="title">"The adventures of Simba"</p>
                     <p class="author">Peter McKinley</p>
                     <p class="pages">113</p>
-                    <div class="book-button-cont">
+
                         <div class="read-button-cont">
-                            <div class="read-unread">
+ 
                                 UNREAD
-                            </div>
+
                             <button class="change-button">CHANGE</button>
                         </div>
                         <button class="remove-button">REMOVE</button>
-                    </div>
+
                 </div>
                 <div class="book-card">
                     <p class="title">"The adventures of Simba"</p>

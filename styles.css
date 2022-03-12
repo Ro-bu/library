@@ -61,7 +61,7 @@ body{
 .header{
     background-color: #ffffff;
     box-shadow: 0px 0px 3px 2px #cfcfcf;
-    z-index: 2;
+    z-index: 1;
     box-sizing: border-box;
     padding: 30px 50px 30px 50px;
     display: flex;
@@ -104,6 +104,7 @@ body{
     justify-content: center;
     padding: 10px 20px 10px 20px;
     border-radius: 15px;
+    cursor: default;
 }
 .add-book:hover{
     background-color: #cfcfcf;
@@ -158,6 +159,10 @@ body{
 .read-button-cont button{
     width: 50%;
     background-color: #fca311;
+    border: none;
+    font-size:1em;
+    padding: 10px 0 10px 0;
+    border-radius: 5px;
 }
 .read-unread{
     width: 50%;
@@ -165,4 +170,98 @@ body{
 }
 .remove-button{
     background-color: #e63946;
+    border: none;
+    font-size:1em;
+    padding: 10px 0 10px 0;
+    border-radius: 5px;
+    width: 100%;
+}
+.modal{
+    display: none;
+    position: fixed;
+    z-index: 2;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.3);
+}
+.modal-content{
+    background-color: #ffffff;
+    margin: 10% auto;
+    border-radius: 15px;
+    height: auto;
+    width: 400px;
+    box-sizing: border-box;
+    padding: 50px 40px;
+    font-size: 1.3em;
+    position: relative;
+}
+.modal-content h2{
+    padding: 10px 0 30px 0;
+    font-size: 1.5em;
+    text-align: center;
+    font-weight: 700;
+}
+.modal-content form{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+}
+.modal-content input{
+    border: 1px solid #cfcfcf;
+    border-radius: 5px;
+    font-size: 1em;
+    margin-top: 10px;
+}
+.modal-content form div{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+.modal-content form div:last-child{
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 0px;
+}
+.modal-content form div:last-child div{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin: 10px 0 0 0;
+}
+.modal-content form div:last-child div input{
+    margin: 0 10px 0 0;
+}
+.modal-content button{
+    border:none;
+    font-size: 1.2em;
+    padding: 10px 30px 10px 30px;
+    border-radius: 15px;
+    font-weight: 700;
+    background-color: #fca311;
+}
+.modal-content button:hover{
+    background-color: #ed9607;
+}
+.modal-close{
+    color: #cfcfcf;
+    float: right;
+    font-size: 36px;
+    font-weight: bold;
+    position: absolute;
+    top: 15px;
+    right: 30px;
+    cursor: pointer;
+}
+.modal-close:hover,
+.modal-close:focus{
+    color:#b6b6b6;
+}
+
+.radio-cont div{
+    display: flex;
+    width: 50%;
 }
