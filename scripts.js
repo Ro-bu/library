@@ -2,17 +2,24 @@
 const modal = document.querySelector(".modal");
 const modalClose = document.querySelector(".modal-close");
 modalClose.onclick = function(){
-    modal.style.display="none";
+    closeModal();
 };
 window.onclick = function(){
     if (event.target == modal){
-        modal.style.display = "none";
+        closeModal();
     }
 };
 const addBook = document.querySelector(".add-book");
 addBook.onclick = function(){
-    modal.style.display="block";
+    showModal();
 };
+
+function closeModal(){
+    modal.style.display = "none";
+}
+function showModal(){
+    modal.style.display="block";
+}
 
 // LIBRARY
 
@@ -24,14 +31,15 @@ function newBook (title, author, pages, read){
     this.pages = pages
     this.read = read
 };
-
+// ADD BOOKS TO DOM
 function createLibrary(){
     for(let i = 0; i < myLybrary.length; i++ ){
-
+        newBookCard(myLybrary[i]);
     }
 }
-const bookWrapper = document.querySelector(".book-wrapper")
 
+// CREATE SINGLE BOOK CARD
+const bookWrapper = document.querySelector(".book-wrapper")
 function newBookCard (book){
     const bookCard = document.createElement("div");
     const title = document.createElement("p");
@@ -47,24 +55,71 @@ function newBookCard (book){
     readDiv.classList.add("read-button-cont");
     readButton.classList.add("change-button");
     removeButton.classList.add("remove-button");
-    readText.classList.add("read-unread")
-    bookButtonCont.classList.add("book-button-cont")
+    readText.classList.add("read-unread");
+    bookButtonCont.classList.add("book-button-cont");
 
-    title.textContent = `"${book.title}"`
-    author.textContent = book.author
-    pages.textContent = `${book.pages} pages`
-    readText.textContent = book.read
-    readButton.textContent = "CHANGE"
-    removeButton.textContent = "REMOVE"
+    title.textContent = `"${book.title}"`;
+    author.textContent = book.author;
+    pages.textContent = `${book.pages} pages`;
+    readText.textContent = book.read;
+    readButton.textContent = "CHANGE";
+    removeButton.textContent = "REMOVE";
 
-    bookCard.appendChild(title)
-    bookCard.appendChild(author)
-    bookCard.appendChild(pages)
-    readDiv.appendChild(readText)
-    readDiv.appendChild(readButton)
-    bookButtonCont.appendChild(readDiv)
-    bookButtonCont.appendChild(removeButton)
-    bookCard.appendChild(bookButtonCont)
+    bookCard.appendChild(title);
+    bookCard.appendChild(author);
+    bookCard.appendChild(pages);
+    readDiv.appendChild(readText);
+    readDiv.appendChild(readButton);
+    bookButtonCont.appendChild(readDiv);
+    bookButtonCont.appendChild(removeButton);
+    bookCard.appendChild(bookButtonCont);
 
-    bookWrapper.appendChild(bookCard)
+    bookWrapper.appendChild(bookCard);
+};
+
+// MODAL FORM TO BOOK OBJECT
+
+const modalSubmitButton = document.querySelector("#modalSubmit");
+modalSubmitButton.onclick = function(){
+    addBookForm();
+};
+
+function addBookForm(){
+    const noErrors = validateForm();
+    if(noErrors){
+        formToBook();
+        bookWrapper.innerHTML = "";
+        createLibrary();
+        closeModal();
+    }
+};
+
+function formToBook(){
+    const title = document.querySelector("#title").value;
+    const author = document.querySelector("#author").value;
+    const pages = document.querySelector("#pages").value;
+    const read = document.querySelector('input[name="read"]:checked').value;
+
+    const bookToAdd = new newBook(title, author, pages, read);
+    myLybrary.push(bookToAdd);
+
+    const form = document.querySelector("form");
+    form.reset();
+};
+
+// FORM VALIDATION
+
+function validateForm(){
+    const title = document.querySelector("#title").value;
+    const author = document.querySelector("#author").value;
+    const pages = document.querySelector("#pages").value;
+    const errorMessages = document.querySelectorAll(".error-message");
+    if(title == "" || author == "" || pages <= 0 || pages.match(/[^0-9]/)){
+        errorMessages.forEach(message => message.classList.add("active"));
+        return false;
+    } else{
+        errorMessages.forEach(message => message.classList.remove("active"));
+        return true;
+    }
 }
+

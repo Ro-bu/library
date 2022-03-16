@@ -16,21 +16,25 @@
             <div class="modal-content">
                 <h2>Add Your Book</h2>
                 <span class="modal-close">&times;</span>
-                <form>
-                    <div>
+                <form name="bookform" action="#">
+                    <div class="input-div">
                         <label for="title">TITLE</label>
-                        <input type="text" id="title" name="title" required>
+                        <input type="text" id="title" name="title"  required>
+                        <p class="error-message" id="nameError">Please enter a title</p>
                     </div>
-                    <div>
+                    <div class="input-div">
                         <label for="author">AUTHOR</label>
-                        <input type="text" id="author" name="author">
+                        <input type="text" id="author" name="author" required>
+                        <p class="error-message" id="authorError">Please enter an author</p>
+
                     </div>
-                    <div>
+                    <div class="input-div">
                         <label for="pages">PAGES</label>
-                        <input type="text" id="pages" name="pages">
+                        <input type="number" id="pages" name="pages" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" required>
+                        <p class="error-message" id="pageError">Please enter a number bigger than 0</p>
                     </div>
                     <div>
-                        <p>READ</p>
+                        <p>HAVE YOU READ IT?</p>
                         <div class="radio-cont">
                             <div>
                                 <input type="radio" id="yes" name="read" value="READ" checked>
@@ -42,7 +46,7 @@
                             </div>
                         </div>
                     </div>
-                    <button type="submit" id="modalSubmit">SUBMIT</button>
+                    <button type="button" id="modalSubmit">SUBMIT</button>
                 </form>
             </div>
         </div>
@@ -58,62 +62,7 @@
                 <span>ADD BOOK</span>
             </div>
             <div class="book-wrapper">
-                <div class="book-card">
-                    <p class="title">"The adventures of Simba"</p>
-                    <p class="author">Peter McKinley</p>
-                    <p class="pages">113</p>
-                    <div class="book-button-cont">
-                        <div class="read-button-cont">
-                            <div class="read-unread">
-                                UNREAD
-                            </div>
-                            <button class="change-button">CHANGE</button>
-                        </div>
-                        <button class="remove-button">REMOVE</button>
-                    </div>
-                </div>
-                <div class="book-card">
-                    <p class="title">"The adventures of Simba"</p>
-                    <p class="author">Peter McKinley</p>
-                    <p class="pages">113</p>
-                    <div class="book-button-cont">
-                        <div class="read-button-cont">
-                            <div class="read-unread">
-                                UNREAD
-                            </div>
-                            <button class="change-button">CHANGE</button>
-                        </div>
-                        <button class="remove-button">REMOVE</button>
-                    </div>
-                </div>
-                <div class="book-card">
-                    <p class="title">"The adventures of Simba"</p>
-                    <p class="author">Peter McKinley</p>
-                    <p class="pages">113</p>
 
-                        <div class="read-button-cont">
- 
-                                UNREAD
-
-                            <button class="change-button">CHANGE</button>
-                        </div>
-                        <button class="remove-button">REMOVE</button>
-
-                </div>
-                <div class="book-card">
-                    <p class="title">"The adventures of Simba"</p>
-                    <p class="author">Peter McKinley</p>
-                    <p class="pages">113</p>
-                    <div class="book-button-cont">
-                        <div class="read-button-cont">
-                            <div class="read-unread">
-                                UNREAD
-                            </div>
-                            <button class="change-button">CHANGE</button>
-                        </div>
-                        <button class="remove-button">REMOVE</button>
-                    </div>
-                </div>
             </div>
         </div>
     </div>

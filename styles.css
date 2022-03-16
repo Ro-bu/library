@@ -43,15 +43,12 @@ table {
 	border-spacing: 0;
 }
 
-
-
-
+/* RESET END */
 
 html{
     font-family: 'Montserrat', sans-serif;
 }
 body{
-    min-width: 100vw;
     min-height: 100vh; 
 }
 .main-wrapper{
@@ -85,9 +82,6 @@ body{
 .header button:hover{
     background-color: #ed9607;
 }
-.header button:active{
-    box-shadow: 0px 0px 2px 2px #e5e5e5;
-}
 .main-content{
     background-color: #e5e5e5;
     min-height: 85vh;
@@ -118,7 +112,7 @@ body{
     grid-template-columns: repeat(auto-fit, 350px);
     /* grid-template-rows: repeat(auto-fit, 350px); */
     gap: 40px;
-    padding: 0 3em 0 3em; 
+    padding: 0 3em 3em 3em; 
     width: 100%;
     box-sizing: border-box;
 }
@@ -164,6 +158,9 @@ body{
     padding: 10px 0 10px 0;
     border-radius: 5px;
 }
+.read-button-cont button:hover{
+    background-color: #ed9607;
+}
 .read-unread{
     width: 50%;
     text-align: center;
@@ -175,6 +172,9 @@ body{
     padding: 10px 0 10px 0;
     border-radius: 5px;
     width: 100%;
+}
+.remove-button:hover{
+    background-color: #d32e3c;
 }
 .modal{
     display: none;
@@ -209,6 +209,18 @@ body{
     justify-content: space-between;
     flex-direction: column;
 }
+.error-message{
+    color: rgb(180, 0, 0);
+    font-size: 0.7em;
+    padding-top: 3px;
+    display: none;
+}
+.active{
+    display: block;
+}
+.input-div{
+    min-height: 95px;
+}
 .modal-content input{
     border: 1px solid #cfcfcf;
     border-radius: 5px;
@@ -218,7 +230,7 @@ body{
 .modal-content form div{
     display: flex;
     flex-direction: column;
-    margin-bottom: 20px;
+    margin-bottom: 0px;
 }
 .modal-content form div:last-child{
     display: flex;
@@ -230,7 +242,7 @@ body{
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    margin: 10px 0 0 0;
+    margin: 20px 0 0 0;
 }
 .modal-content form div:last-child div input{
     margin: 0 10px 0 0;
@@ -242,6 +254,7 @@ body{
     border-radius: 15px;
     font-weight: 700;
     background-color: #fca311;
+    margin-top: 20px;
 }
 .modal-content button:hover{
     background-color: #ed9607;
