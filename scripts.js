@@ -1,6 +1,12 @@
 // OPEN CLOSE MODAL
 const modal = document.querySelector(".modal");
 const modalClose = document.querySelector(".modal-close");
+function closeModal(){
+    modal.style.display = "none";
+}
+function showModal(){
+    modal.style.display="block";
+}
 modalClose.onclick = function(){
     closeModal();
 };
@@ -14,12 +20,6 @@ addBook.onclick = function(){
     showModal();
 };
 
-function closeModal(){
-    modal.style.display = "none";
-}
-function showModal(){
-    modal.style.display="block";
-}
 
 // LIBRARY
 
@@ -31,15 +31,10 @@ function newBook (title, author, pages, read){
     this.pages = pages
     this.read = read
 };
-// ADD BOOKS TO DOM
-function createLibrary(){
-    for(let i = 0; i < myLybrary.length; i++ ){
-        newBookCard(myLybrary[i]);
-    }
-}
 
 // CREATE SINGLE BOOK CARD
 const bookWrapper = document.querySelector(".book-wrapper")
+
 function newBookCard (book){
     const bookCard = document.createElement("div");
     const title = document.createElement("p");
@@ -77,12 +72,32 @@ function newBookCard (book){
     bookWrapper.appendChild(bookCard);
 };
 
-// MODAL FORM TO BOOK OBJECT
+// ADD BOOKS TO DOM
+function createLibrary(){
+    for(let i = 0; i < myLybrary.length; i++ ){
+        newBookCard(myLybrary[i]);
+        document.querySelector(".book-card:last-child .remove-button").dataset.bookNumber = i;
+    };
+    const removeButtons = document.querySelectorAll(".remove-button")
 
-const modalSubmitButton = document.querySelector("#modalSubmit");
-modalSubmitButton.onclick = function(){
-    addBookForm();
+    removeButtons.forEach(button =>{
+        button.addEventListener("click", () => {
+            const arrayIndex = button.dataset.bookNumber
+            removeBook(arrayIndex);
+        });
+    });
 };
+// REMOVE BOOK BUTTON
+
+
+
+function removeBook(a){
+    console.log(a);
+    myLybrary.splice(a,1);
+    bookWrapper.innerHTML = "";
+    createLibrary();
+}
+// MODAL FORM TO BOOK OBJECT
 
 function addBookForm(){
     const noErrors = validateForm();
@@ -92,6 +107,11 @@ function addBookForm(){
         createLibrary();
         closeModal();
     }
+};
+
+const modalSubmitButton = document.querySelector("#modalSubmit");
+modalSubmitButton.onclick = function(){
+    addBookForm();
 };
 
 function formToBook(){
