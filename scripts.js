@@ -20,10 +20,8 @@ addBook.onclick = function(){
     showModal();
 };
 
-
 // LIBRARY
-
-let myLybrary = [{title:"Good Book", author:"best author jr", pages:"74", read:"UNREAD"}, {title:"Good Book2", author:"best author jr 2", pages:"742", read:"READ"}];
+let myLybrary = [];
 
 function newBook (title, author, pages, read){
     this.title = title
@@ -31,6 +29,13 @@ function newBook (title, author, pages, read){
     this.pages = pages
     this.read = read
 };
+newBook.prototype.changeRead = function(){
+    if( this.read == "UNREAD"){
+        this.read = "READ";
+    }else {
+        this.read = "UNREAD";
+    }
+}
 
 // CREATE SINGLE BOOK CARD
 const bookWrapper = document.querySelector(".book-wrapper")
@@ -76,29 +81,42 @@ function newBookCard (book){
 function createLibrary(){
     for(let i = 0; i < myLybrary.length; i++ ){
         newBookCard(myLybrary[i]);
-        document.querySelector(".book-card:last-child .remove-button").dataset.bookNumber = i;
+        document.querySelector(".book-card:last-child").dataset.bookNumber = i;
     };
     const removeButtons = document.querySelectorAll(".remove-button")
 
     removeButtons.forEach(button =>{
         button.addEventListener("click", () => {
-            const arrayIndex = button.dataset.bookNumber
+            const arrayIndex = button.parentElement.parentElement.dataset.bookNumber
             removeBook(arrayIndex);
         });
     });
+    const readButtons = document.querySelectorAll(".change-button")
+
+    readButtons.forEach(button =>{
+        button.addEventListener("click", () =>{
+            const arrayIndex = button.parentElement.parentElement.parentElement.dataset.bookNumber
+            changeReadStatus(arrayIndex);
+        })
+    })
+
 };
+
 // REMOVE BOOK BUTTON
-
-
-
 function removeBook(a){
-    console.log(a);
     myLybrary.splice(a,1);
     bookWrapper.innerHTML = "";
     createLibrary();
 }
-// MODAL FORM TO BOOK OBJECT
 
+// CHANGE READ STATUS
+function changeReadStatus(a){
+    myLybrary[a].changeRead();
+    bookWrapper.innerHTML = "";
+    createLibrary();
+}
+
+// MODAL FORM TO BOOK OBJECT
 function addBookForm(){
     const noErrors = validateForm();
     if(noErrors){
@@ -128,7 +146,6 @@ function formToBook(){
 };
 
 // FORM VALIDATION
-
 function validateForm(){
     const title = document.querySelector("#title").value;
     const author = document.querySelector("#author").value;
