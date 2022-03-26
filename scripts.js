@@ -21,21 +21,44 @@ addBook.onclick = function(){
 };
 
 // LIBRARY
-let myLybrary = [];
 
-function newBook (title, author, pages, read){
-    this.title = title
-    this.author = author
-    this.pages = pages
-    this.read = read
-};
-newBook.prototype.changeRead = function(){
-    if( this.read == "UNREAD"){
-        this.read = "READ";
-    }else {
-        this.read = "UNREAD";
+
+class Library {
+    constructor(){
+        this.books = [];
+    }
+    addBook(book) {
+        this.books.push(book);
+    }
+    removeBook(a){
+        this.books.splice(a,1);
+        createLibrary();
+    }
+    changeReadStatus(a) {
+        this.books[a].changeRead();
+        createLibrary();
+    }
+
+}
+
+let myLybrary = new Library;
+// BOOK OBJECT
+class newBook {
+    constructor(title, author, pages, read){
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.read = read;
+    }
+    changeRead() {
+        if(this.read == "UNREAD") {
+            this.read = "READ";
+        } else {
+            this.read = "UNREAD";
+        }
     }
 }
+
 
 // CREATE SINGLE BOOK CARD
 const bookWrapper = document.querySelector(".book-wrapper")
@@ -79,8 +102,9 @@ function newBookCard (book){
 
 // ADD BOOKS TO DOM
 function createLibrary(){
-    for(let i = 0; i < myLybrary.length; i++ ){
-        newBookCard(myLybrary[i]);
+    bookWrapper.innerHTML = "";
+    for(let i = 0; i < myLybrary.books.length; i++ ){
+        newBookCard(myLybrary.books[i]);
         document.querySelector(".book-card:last-child").dataset.bookNumber = i;
     };
     const removeButtons = document.querySelectorAll(".remove-button")
@@ -88,7 +112,7 @@ function createLibrary(){
     removeButtons.forEach(button =>{
         button.addEventListener("click", () => {
             const arrayIndex = button.parentElement.parentElement.dataset.bookNumber
-            removeBook(arrayIndex);
+            myLybrary.removeBook(arrayIndex);
         });
     });
     const readButtons = document.querySelectorAll(".change-button")
@@ -96,32 +120,19 @@ function createLibrary(){
     readButtons.forEach(button =>{
         button.addEventListener("click", () =>{
             const arrayIndex = button.parentElement.parentElement.parentElement.dataset.bookNumber
-            changeReadStatus(arrayIndex);
+            myLybrary.changeReadStatus(arrayIndex);
         })
     })
 
 };
 
-// REMOVE BOOK BUTTON
-function removeBook(a){
-    myLybrary.splice(a,1);
-    bookWrapper.innerHTML = "";
-    createLibrary();
-}
 
-// CHANGE READ STATUS
-function changeReadStatus(a){
-    myLybrary[a].changeRead();
-    bookWrapper.innerHTML = "";
-    createLibrary();
-}
 
 // MODAL FORM TO BOOK OBJECT
 function addBookForm(){
     const noErrors = validateForm();
     if(noErrors){
         formToBook();
-        bookWrapper.innerHTML = "";
         createLibrary();
         closeModal();
     }
@@ -139,7 +150,7 @@ function formToBook(){
     const read = document.querySelector('input[name="read"]:checked').value;
 
     const bookToAdd = new newBook(title, author, pages, read);
-    myLybrary.push(bookToAdd);
+    myLybrary.addBook(bookToAdd);
 
     const form = document.querySelector("form");
     form.reset();
